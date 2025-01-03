@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Resume</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+
+        .resume-container {
+             max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15),
+                        0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .left-section {
+            background: #2a9d8f;
+            color: #ffffff;
+            padding-left:2%;
+            padding-top: 3%;
+            padding-bottom: 4%;
+           
+            display: flex; /* Add flex display */
+          flex-direction: column; /* Stack children vertically */
+         justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+            text-align: left; /* Optional: Center-align text */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1; /* Below the right section */
+            transition: opacity 0.8s ease;
+           }
+
+
+           .left-section img {
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 20px;
+            border: 4px solid #ffffff;
+            transition: transform 0.3s ease;
+           }
+
+
+           .left-section img:hover {
+            transform: scale(1.1);
+        }
+        .left-section h1 {
+            font-size: clamp(2em, 5vw, 3em);
+            margin-bottom: 10px;
+        }
+        
+        
+        .left-section p {
+            font-size: clamp(1.5em, 2.5vw, 1.3em);
+            margin-bottom: 20px;
+        }
+
+
+        .left-section .contact-info {
+            font-size: clamp(1.5em, 2.5vw, 1.3em);
+            line-height: 1.5;
+        }
+        .right-section {
+            padding: 30px;
+            width: 65%;
+        }
+         #contact{
+            
+            line-height: 1.5;
+         }
+         .leftselection{
+        color: #0e0f0f;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+
+              }
+
+
+              .button-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+}
+        .button-container button {
+            background: linear-gradient(to bottom, #4c4fdd, #2c2a9d);
+            color: #fff;
+            border: none;
+            padding: 13px 20px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px #1b1a75;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px #1b1a75;
+        }
+
+        .button-container button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px #1b1a75;
+        }
+
+          /* ---------------------------Back to profile button------------------------------- */
+
+          .back-to-profile {
+    text-align: center;
+    margin-top: 0%;
+    margin-bottom: 4%;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+}
+
+.back-to-profile button{
+    background: linear-gradient(to bottom, #dd4c5f, #2c2a9d);
+            color: #fff;
+            border: none;
+            padding: 13px 20px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px #1b1a75;
+          
+          }
+      
+          .back-to-profile button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px #1b1a75;
+        }
+
+        .back-to-profile button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px #1b1a75;
+        }
+
+        @keyframes buttonSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+       
+      /* ---------------------------Right Section------------------------------- */
+
+      .right-section {
+          padding: 30px;
+            width: 65%;
+            display: none; /* Initially hidden */
+            opacity: 0;
+            
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2; /* Ensures it stays on top */
+            transition: opacity 0.8s ease;
+        }
+        .right-section h2 {
+            color: #2a9d8f;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+
+        }
+        .right-section .section {
+            margin-bottom: 20px;
+        }
+        .right-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .right-section ul li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateX(-30px);
+            
+        }
+
+        .right-section ul li.active {
+            animation: fadeInLeft 1s forwards;
+        }
+
+
+        .right-section ul li:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+        .right-section ul li:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        .right-section ul li:nth-child(3) {
+            animation-delay: 0.7s;
+        }
+        .right-section ul li:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+        .right-section ul li:nth-child(5) {
+            animation-delay: 1s;
+        }
+        .right-section ul li:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+        .right-section ul li:nth-child(7) {
+            animation-delay: 1.4s;
+        }
+           
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+           
+
+
+           
+           /* ---------------------------Declration------------------------------- */
+           
+           .declaration-section {
+            margin-top: 30px;
+        }
+        .declaration {
+            margin-bottom: 20px;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .left {
+            text-align: left;
+        }
+        .right {
+            text-align: right;
+        }
+          
+
+         </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Left Section -->
+        <div class="left-section" id="left">
+            <img src="https://1drv.ms/i/c/5c24657f4b8b741c/IQSNWrQT36X1TI8J4H3-MYzRATt8Py-DjbRx8uv0a1NhXQE?width=796&height=980" alt="Profile Picture">
+            <h1>UTTAPA KEERAPNUR</h1>
+            <p>Production Executive</p>
+            <div class="contact-info">
+                 <h3 class="leftselection" >Personal Details:</h3>
+                <ul style="list-style: none;">
+                    <li><strong>Date of Birth:</strong> 10th April 1993</li>
+                    <li><strong>Gender:</strong> Male</li>
+                    <li><strong>Nationality:</strong> Indian</li>
+                    <li><strong>Religion:</strong> Hindu</li>
+                    <li><strong>Marital Status:</strong> Married</li>
+                    <li><strong>Languages Known:</strong> Marathi, Hindi, English & Kannada</li>
+                    <li><strong>Passport No.:</strong> R8638311</li>
+                    </ul>
+                    <h3 class="leftselection">Contact Me:</h3>
+                       <ul style="list-style: none;" id="contact">
+                    <li><strong> Email:</strong>ulbk19111993@gmail.com</li>
+                    <li> Phone:</strong>+91 8779873751/+91 9011136756</li>
+                    <li><strong>Address:</strong> Mohopada, Tal: Khalapur,Dist: Raigad, Maharashtra - 410222</li>
+                </ul>
+
+                <div class="button-container">
+                    <button id="read-more-btn">Read More</button>
+                </div>
+         
+            </div>
+        </div>
+
+
+        <!-- Right Section -->
+        <div class="right-section">
+
+            <div class="back-to-profile">
+                <button id="back-to-profile" href="#left">Back To Profile</button>
+            </div>
+
+            <div class="section">
+                <h2>Educational Background</h2>
+                <ul style="list-style: none;">
+                    <li>&#10146; Secondary School Certificate (SSC) - March 2009, Mumbai University</li>
+                    <li>&#10146; Higher Secondary Certificate (HSC) - February 2011, Mumbai University</li>
+                    <li>&#10146; Bachelor of Science (B.Sc. Chemistry) - March 2014, Mumbai University</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Technical Proficiency</h2>
+                <ul style="list-style: none;">
+                    <li>&#10146; Proficient in MS Office Suite (Word, Excel, PowerPoint)</li>
+                    <li>&#10146; Certified in MS-CIT with 62.00%</li>
+                    <li>&#10146; Hands-on experience with SAP Business One Modules</li>
+                    <li>&#10146; Familiar with SCADA Systems</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Professional Experience</h2>
+                <ol>
+               <li><p><strong>Production Executive</strong> at <strong>Lakhani Dyestuff Pvt. Ltd.</strong> (January 2019 - Present)</p></li>
+                <ul style="list-style: none; line-height: 1%;">
+                    <li>&#10146;Supervised production processes as per schedule and plans</li>
+                    <li>&#10146; Managed and guided production teams and operators</li>
+                    <li>&#10146; Ensured adherence to safety protocols and operational standards</li>
+                    <li>&#10146; Maintained inventory of raw materials and supplies</li>
+                    <li>&#10146; Monitored quality control and ensured product standards</li>
+                    <li>&#10146; Oversaw ultra-filtration, nano-filtration, and RO systems</li>
+                    <li>&#10146; Implemented lean manufacturing techniques to reduce waste</li>
+                    <li>&#10146; Supervision of the Ceramic Filtration Plant.</li>
+                    <li>&#10146; Supervision of the Ceramic Filtration Plant.</li>
+                </ul> <br>
+                <li><p><strong>Junior Officer in Production Department</strong> at <strong>Jaysynth Dyestuff Ltd.</strong> (August 2015-January 2019)</p></li>
+                 <ul style="list-style: none;">
+                    <li>&#10146;Supervised production activities to ensure compliance with batch-wise plans and schedules.</li>
+                    <li>&#10146;Managed product quality to meet established standards for water-based reactive ink.</li>
+                    <li>&#10146;Monitor and Control production parameters such as
+                        <ul style="list-style:lower-roman;margin-left: 10%;">
+                        <li>Shade</li>
+                        <li>Surface Tension</li>
+                        <li>Specific gravity by incorporating appropriate additives, solvents, and concentrates</li>
+                        </ul>
+                  <li>&#10146;Managed product quality to meet established standards for water-based reactive ink.</li>    
+                 </ul>
+            </ol>
+            </div>
+            <div class="section">
+                <h2>Skills</h2>
+                <ul>
+                    <li>&#10146; Comprehensive knowledge of SAP Production, Inventory, and Quality Modules</li>
+                    <li>&#10146; In-depth expertise in RO Systems and their management</li>
+                    <li>&#10146; Strong command of SCADA and Microsoft Office applications</li>
+                    <li>&#10146; Efficient in batch production as per specifications</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Strengths</h2>
+                <ul style=" border-bottom: 2px solid #ddd;">
+                    <li>&#10146; Exceptional communication and interpersonal skills</li>
+                    <li>&#10146; Proven ability to build and maintain effective team relationships</li>
+                    <li>&#10146; Quick decision-making with a logical and fact-driven approach</li>
+                    <li>&#10146; Expertise in team-based problem-solving and collaboration</li>
+                </ul>
+            </div>
+           
+            <div class="declaration-section">
+                <h3 class="section-title">Declaration</h3>
+                <p class="declaration">
+                    I hereby declare that the above-mentioned information is true and correct to the best of my knowledge and belief.
+                </p>
+                <div class="signature-section">
+                    <div class="left">
+                        <p><strong>Date:</strong> <span id="current-date"></span></p>
+                        <p><strong>Place:</strong> Badlapur</p>
+                    </div>
+                    <div class="right">
+                        <p>UTTAPPA KERAPNUR.</p>
+                        <p><strong>Signature</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+
+ <script>
+    
+    const readMoreBtn = document.getElementById('read-more-btn');
+        const leftSection = document.querySelector('.left-section');
+        const rightSection = document.querySelector('.right-section');
+
+        // Event listener for button click
+        readMoreBtn.addEventListener('click', () => {
+            // Hide left section with transition
+            leftSection.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
+            leftSection.style.transform = 'scaleY(0)';
+            leftSection.style.opacity = '0';
+
+            // Show right section after animation
+            setTimeout(() => {
+                leftSection.style.display = 'none'; // Hide left section completely
+                rightSection.style.display = 'block'; // Show right section
+                rightSection.style.opacity = '1'; // Make it visible
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Start the animation for list items
+                const listItems = rightSection.querySelectorAll('ul li');
+                listItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('active'); // Activate animation
+                    }, index * 300); // Delay for each item
+                });
+            }, 800); // Match the transition duration
+        });
+
+
+        // ---------------------------------------back to profile--------------
+        
+        const backToProfileBtn = document.getElementById('back-to-profile');
+         // Back to profile event listener
+         backToProfileBtn.addEventListener('click', () => {
+            // Hide right section with smooth scrolling
+            rightSection.style.transition = 'opacity 0.8s ease';
+            rightSection.style.opacity = '0';
+
+            // Delay the section transition to make it smooth
+            setTimeout(() => {
+                rightSection.style.display = 'none'; // Hide right section completely
+                leftSection.style.display = 'flex'; // Show left section
+                leftSection.style.opacity = '1'; // Make left section visible
+                leftSection.style.transform = 'scaleY(1)'; // Ensure the scaling resets
+
+                // Scroll to the top after transition
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 800); // Match the transition duration
+        });
+
+
+    function formatDate(date) {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = months[date.getMonth()];
+        const year = String(date.getFullYear()).slice(-2); // Last two digits of year
+        return `${day}-${month}-${year}`;
+    }
+
+    // Automatically insert the formatted current date
+    const dateElement = document.getElementById('current-date');
+    const today = new Date();
+    dateElement.textContent = formatDate(today);
+
+    </script>
+</body>
+</html>
