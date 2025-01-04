@@ -287,10 +287,88 @@
         }
           
 
+        
+        /* ---------------------------------print----------------------------- */
+        .print-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 30px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .print-btn:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .print-btn {
+                font-size: 14px;
+                padding: 8px 16px;
+         }
+         }
+             
+              
+            @media print {
+                      body {
+                     margin: 0;
+                    padding: 0;
+                        }
+
+
+            .left-section, .right-section {
+               float: none;
+                display: block;
+                 width: 100%; /* Adjust as per your layout */
+                }
+ 
+              * {
+             color: black; /* Optional: Force text to black for print clarity */
+               background: transparent; /* Ensure no unwanted backgrounds */
+               animation: none;
+              } 
+
+           .right-section{
+            padding: 30px;
+            width: 65%;
+            display: block;
+            opacity: 1;
+             top: 0;
+            left: 0;
+            width: 100%;
+            transition: none;
+            animation: none !important;
+        }
+        
+        .right-section ul li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            opacity: 1;
+            transform: none
+            
+        }
+        .print-btn {
+                display: none;
+            }
+            .button-container {
+                display: none;
+            }
+            .back-to-profile {
+                display: none;
+            }
+ 
+         }
+          
+        
          </style>
 </head>
 <body>
+    
     <div class="resume-container">
+        <button class="print-btn" onclick="window.print()">Print Resume</button>
         <!-- Left Section -->
         <div class="left-section" id="left">
             <img src="https://1drv.ms/i/c/5c24657f4b8b741c/IQSNWrQT36X1TI8J4H3-MYzRATt8Py-DjbRx8uv0a1NhXQE?width=796&height=980" alt="Profile Picture">
@@ -440,7 +518,7 @@
                     setTimeout(() => {
                         item.classList.add('active'); // Activate animation
                     }, index * 300); // Delay for each item
-                });
+                }); 
             }, 800); // Match the transition duration
         });
 
@@ -465,6 +543,17 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 800); // Match the transition duration
         });
+
+
+        function printPage() {
+    // Wait for the fade-in animation to complete
+    setTimeout(() => {
+        window.print();
+    }, 1000); // Adjust time to match your animation duration
+}
+
+// Attach the function to your print button
+document.getElementById('printButton').addEventListener('click', printPage);
 
 
     function formatDate(date) {
