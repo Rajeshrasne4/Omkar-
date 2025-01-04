@@ -321,7 +321,7 @@
 
             .left-section, .right-section {
                float: none;
-                display: block;
+                display: flex;
                  width: 100%; /* Adjust as per your layout */
                 }
  
@@ -525,35 +525,11 @@
 
         // ---------------------------------------back to profile--------------
         
-        const backToProfileBtn = document.getElementById('back-to-profile');
-         // Back to profile event listener
-         backToProfileBtn.addEventListener('click', () => {
-            // Hide right section with smooth scrolling
-            rightSection.style.transition = 'opacity 0.8s ease';
-            rightSection.style.opacity = '0';
+        document.getElementById('back-to-profile').addEventListener('click', function() {
+    location.reload(); // Refresh the page
+});
 
-            // Delay the section transition to make it smooth
-            setTimeout(() => {
-                rightSection.style.display = 'none'; // Hide right section completely
-                leftSection.style.display = 'flex'; // Show left section
-                leftSection.style.opacity = '1'; // Make left section visible
-                leftSection.style.transform = 'scaleY(1)'; // Ensure the scaling resets
-
-                // Scroll to the top after transition
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 800); // Match the transition duration
-        });
-
-
-        function printPage() {
-    // Wait for the fade-in animation to complete
-    setTimeout(() => {
-        window.print();
-    }, 1000); // Adjust time to match your animation duration
-}
-
-// Attach the function to your print button
-document.getElementById('printButton').addEventListener('click', printPage);
+        
 
 
     function formatDate(date) {
